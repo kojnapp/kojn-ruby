@@ -20,6 +20,9 @@ module Kojn
         self.mode = Kojn::Ipn::ENCRYPTION
         self.decrypt
       end
+
+      # Create a real object.
+      self.transaction = Kojn::Transaction.new(self.transaction)
     end
 
     def authentic?
