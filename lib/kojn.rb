@@ -5,12 +5,15 @@ require 'base64'
 require 'openssl'
 require 'digest/sha2'
 require 'json'
+require 'net/http'
+require 'uri'
+
+require 'kojn/model'
 
 require 'kojn/crypto'
 require 'kojn/net'
 require 'kojn/transaction'
 require 'kojn/ipn'
-require 'kojn/model'
 
 module Kojn
   # Api key
