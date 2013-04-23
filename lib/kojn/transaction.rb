@@ -19,29 +19,44 @@ module Kojn
       self.access_token = Kojn.api_key
     end
 
-    def all options = {}
-      Kojn.parse_objects! Kojn::Net::get('/api/transactions').read_body, Kojn::Transaction
+    def all(options = {})
+      Kojn.parse_objects! Kojn::Net::get('/api/transactions').read_body, Kojn::Tx
     end
 
-    def find id, options = {}
-      Kojn.parse_object! Kojn::Net::get("/api/transactions/#{id}").read_body, Kojn::Transaction
+    def create(options = {})
+      Kojn.parse_object! Kojn::Net::post('/api/transactions', {transaction: options}).read_body, Kojn::Tx
     end
 
-    def update id, options = {}
-      Kojn.parse_object! Kojn::Net::patch("/api/transactions/#{id}", options).read_body, Kojn::Transaction
+    def find(id, options = {})
+      Kojn.parse_object! Kojn::Net::get("/api/transactions/#{id}").read_body, Kojn::Tx
+    end
+
+    def update(id, options = {})
+      Kojn.parse_object! Kojn::Net::patch("/api/transactions/#{id}", options).read_body, Kojn::Tx
     end
   end
 
-  class Transaction
+  class Tx
+    UNCONFIRMED = 1
+    INSUFFICIENT = 2
+    SEEN = 3
+    CANCELLED = 4
+
     if ActiveModel::VERSION::MAJOR <= 3
       include ActiveModel::Validations
       include ActiveModel::Conversion
       extend ActiveModel::Naming
+
+      def initialize(attributes = {})
+        attributes.each do |name, value|
+          send("#{name}=", value)
+        end
+      end
     else
-      include ActiveModel
+      include ActiveModel::Model
     end
 
-    attr_accessor :internal_id, :external_id, :address, :currency, :amount, :amount_in_euro, :exchange_rate, :status, :received_amount
+    attr_accessor :internal_id, :external_id, :address, :currency, :amount, :amount_in_euro, :exchange_rate, :status, :received_amount, :description, :seen, :received_amount_in_euro
     attr_accessor :paid, :amount_left, :redirect_uri
     attr_accessor :error, :message, :errors
   end
