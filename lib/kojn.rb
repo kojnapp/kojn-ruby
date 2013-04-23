@@ -10,6 +10,7 @@ require 'kojn/crypto'
 require 'kojn/net'
 require 'kojn/transaction'
 require 'kojn/ipn'
+require 'kojn/model'
 
 module Kojn
   # Api key

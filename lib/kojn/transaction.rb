@@ -54,6 +54,8 @@ module Kojn
       include ActiveModel::Model
     end
 
+    include Kojn::Model
+
     attr_accessor :internal_id, :external_id, :address, :currency, :amount, :amount_in_euro, :exchange_rate, :status, :received_amount, :description, :seen, :received_amount_in_euro
     attr_accessor :paid, :amount_left, :redirect_uri
     attr_accessor :error, :message, :errors
@@ -72,18 +74,6 @@ module Kojn
     # TODO Make sure if a newly initialized object's internal_id is actually set to nil.
     def new_record?
       self.internal_id == nil
-    end
-
-    # Set the attributes based on the given hash
-    def attributes=(attributes = {})
-      attributes.each do |name, value|
-        send("#{name}=", value)
-      end
-    end
-
-    # Returns a hash with the current instance variables
-    def attributes
-      Hash[instance_variables.map { |name| [name, instance_variable_get(name)] }]
     end
   end
 end
