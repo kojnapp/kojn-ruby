@@ -8,6 +8,8 @@ module Kojn
     def initialize params
       self.content = params
 
+      self.ensure_secure
+
       if params['token']
         self.mode = Kojn::Ipn::INTEGRITY
         self.transaction = params['transaction']
@@ -31,6 +33,14 @@ module Kojn
 
     def decrypt
       self.transaction = Kojn::crypto.decrypt_params(self.content)
+    end
+
+    def ensure_secure(params)
+      if (params['token'] && Kojn.ipn_sec == :integrity) || (params['iv'] && Kojn.ipn_sec == :encryption)
+        true
+      else
+        raise Kojn::AuthenticityException.new("ERROR -*- IPN security expected: #{Kojn.ipn_sec}. Opposite was found. -*- ERROR")
+      end
     end
   end
 

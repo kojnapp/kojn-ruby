@@ -6,8 +6,8 @@ require 'kojn/version'
 Gem::Specification.new do |spec|
   spec.name          = "kojn"
   spec.version       = Kojn::VERSION
-  spec.authors       = ["Maran"]
-  spec.email         = ["maran.hidskes@gmail.com"]
+  spec.authors       = ["Jeffrey Wilcke", "Maran Hidskes"]
+  spec.email         = ["maran.hidskes@gmail.com", "jeff.wilcke@gmail.com"]
   spec.description   = %q{Ruby gem for communicating with the kojn.nl API. Allows you to create and managed invoices.}
   spec.summary       = %q{Ruby gem for communicating with the kojn.nl API.}
   spec.homepage      = "https://kojn.nl"

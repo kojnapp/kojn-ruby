@@ -21,6 +21,10 @@ module Kojn
   # The transactios module
   mattr_accessor :transactions
 
+  # Type of ipn security
+  mattr_accessor :ipn_sec
+  @@ipn_sec = :integrity
+
   def self.crypto
     raise MissingConfigExecption.new("API key not set") unless self.api_key
 
