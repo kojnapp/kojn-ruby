@@ -2,7 +2,7 @@ module Kojn
   module Net
     def self.http
       if defined?(Rails) && Rails.env == 'development'
-        http    = ::Net::HTTP.new('sandbox.kojn.nl')
+        http    = ::Net::HTTP.new('localhost', 3000)
       else
         http    = ::Net::HTTP.new('kojn.nl', 443)
 

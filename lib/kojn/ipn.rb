@@ -22,7 +22,7 @@ module Kojn
       end
 
       # Create a real object.
-      self.transaction = Kojn::Transaction.new(self.transaction)
+      self.transaction = Kojn::Tx.new(self.transaction)
     end
 
     def authentic?
