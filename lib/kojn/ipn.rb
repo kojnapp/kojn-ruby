@@ -8,7 +8,7 @@ module Kojn
     def initialize params
       self.content = params
 
-      self.ensure_secure
+      self.ensure_secure(params)
 
       if params['token']
         self.mode = Kojn::Ipn::INTEGRITY
