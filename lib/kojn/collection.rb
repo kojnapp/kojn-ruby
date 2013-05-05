@@ -12,19 +12,33 @@ module Kojn
     end
 
     def all(options = {})
-      Kojn.parse_objects! Kojn::Net::get(self.path).read_body, self.model
+      parse_objects! Kojn::Net::get(self.path).read_body, self.model
     end
 
     def create(options = {})
-      Kojn.parse_object! Kojn::Net::post(self.path, {invoice: options}).read_body, self.model
+      parse_object! Kojn::Net::post(self.path, {invoice: options}).read_body, self.model
     end
 
     def find(id, options = {})
-      Kojn.parse_object! Kojn::Net::get("#{self.path}/#{id}").read_body, self.model
+      parse_object! Kojn::Net::get("#{self.path}/#{id}").read_body, self.model
     end
 
     def update(id, options = {})
-      Kojn.parse_object! Kojn::Net::patch("#{self.path}/#{id}", options).read_body, self.model
+      parse_object! Kojn::Net::patch("#{self.path}/#{id}", options).read_body, self.model
+    end
+
+    protected
+    def parse_objects!(string, klass)
+      objects = JSON.parse(string)
+      objects.collect do |t_json|
+        parse_object!(t_json, klass)
+      end
+    end
+
+    def parse_object!(object, klass)
+      object = JSON.parse(object) if object.is_a? String
+
+      klass.new(object)
     end
   end
 end

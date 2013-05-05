@@ -1,17 +1,4 @@
 module Kojn
-  def self.parse_objects!(string, klass)
-    objects = JSON.parse(string)
-    objects.collect do |t_json|
-      Kojn.parse_object!(t_json, klass)
-    end
-  end
-
-  def self.parse_object!(object, klass)
-    object = JSON.parse(object) if object.is_a? String
-
-    klass.new(object)
-  end
-
   class Invoices < Kojn::Collection
   end
 
