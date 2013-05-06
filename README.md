@@ -22,7 +22,7 @@ Or install it yourself as:
 
 (TODO: Write inline docs)
 
-Latest dacs can be found here: https://kojn.nl/developer/docs/ruby_setup
+Latest docs can be found here: https://kojn.nl/developer/docs/ruby_setup
 
 ## Contributing
 
