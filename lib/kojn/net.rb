@@ -18,7 +18,7 @@ module Kojn
       request = ::Net::HTTP::Get.new(uri)
 
       request.content_type = 'application/json'
-      request.basic_auth '', Kojn.api_key
+      request.basic_auth Kojn.api_key, ''
       request.body = options.to_json
 
       self.http.request(request)
@@ -28,7 +28,7 @@ module Kojn
       request = ::Net::HTTP::Post.new(uri)
 
       request.content_type = 'application/json'
-      request.basic_auth '', Kojn.api_key
+      request.basic_auth Kojn.api_key, ''
       request.body = options.to_json
 
       self.http.request(request)
@@ -38,7 +38,7 @@ module Kojn
       request = ::Net::HTTP::Patch.new(uri)
 
       request.content_type = 'application/json'
-      request.basic_auth '', Kojn.api_key
+      request.basic_auth Kojn.api_key, ''
       request.body = options.to_json
 
       self.http.request(request)
@@ -49,7 +49,7 @@ module Kojn
       request = ::Net::HTTP::Delete.new(uri)
 
       request.content_type = 'application/json'
-      request.basic_auth '', Kojn.api_key
+      request.basic_auth Kojn.api_key, ''
       request.body = options.to_json
 
       self.http.request(request)
