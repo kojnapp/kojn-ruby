@@ -1,6 +1,8 @@
 # Kojn
 
-TODO: Write a gem description
+Kojn's ruby API library.
+
+Feel free to fork, modify & redistribute under the MIT license.
 
 ## Installation
 
@@ -18,7 +20,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+(TODO: Write inline docs)
+
+Latest dacs can be found here: https://kojn.nl/developer/docs/ruby_setup
 
 ## Contributing
 
