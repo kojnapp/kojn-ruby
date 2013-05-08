@@ -1,58 +1,56 @@
 module Kojn
   module Net
-    def self.http
-      if defined?(Rails) && Rails.env == 'development'
-        http    = ::Net::HTTP.new('localhost', 3000)
-      else
-        http    = ::Net::HTTP.new('kojn.nl', 443)
+    def self.to_uri(path)
+      return "http#{Kojn.ssl ? "s" : ""}://#{Kojn.host}:#{Kojn.port}#{path}"
+    end
 
-        http.use_ssl = true
-        http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+    def self.curl(verb, path, options={})
+      verb = verb.upcase.to_sym
+
+      c = Curl::Easy.new(self.to_uri(path))
+      c.http(verb)
+
+      if verb != :GET
+        c.post_body = options.to_json
       end
 
+      c.headers['Content-Type'] = 'application/json'
+      c.http_auth_types = :basic
+      c.username = Kojn.api_key
 
-      return http
+      return c
     end
 
-    def self.get(uri, options={})
-      request = ::Net::HTTP::Get.new(uri)
+    def self.get(path, options={})
+      request = self.curl(:GET, path, options)
 
-      request.content_type = 'application/json'
-      request.basic_auth Kojn.api_key, ''
-      request.body = options.to_json
+      request.perform
 
-      self.http.request(request)
+      return request
     end
 
-    def self.post(uri, options={})
-      request = ::Net::HTTP::Post.new(uri)
+    def self.post(path, options={})
+      request = self.curl(:POST, path, options)
 
-      request.content_type = 'application/json'
-      request.basic_auth Kojn.api_key, ''
-      request.body = options.to_json
+      request.perform
 
-      self.http.request(request)
+      return request
     end
 
-    def self.patch(uri, options={})
-      request = ::Net::HTTP::Patch.new(uri)
+    def self.patch(path, options={})
+      request = self.curl(:PATCH, path, options)
 
-      request.content_type = 'application/json'
-      request.basic_auth Kojn.api_key, ''
-      request.body = options.to_json
+      request.perform
 
-      self.http.request(request)
-
+      return request
     end
 
-    def self.delete(uri, options={})
-      request = ::Net::HTTP::Delete.new(uri)
+    def self.delete(path, options={})
+      request = self.curl(:DELETE, path, options)
 
-      request.content_type = 'application/json'
-      request.basic_auth Kojn.api_key, ''
-      request.body = options.to_json
+      request.perform
 
-      self.http.request(request)
+      return request
     end
   end
 end

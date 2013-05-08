@@ -1,6 +1,7 @@
 require 'active_support/core_ext'
 require 'active_support/inflector'
 require 'active_model'
+require 'curb'
 
 String.send(:include, ActiveSupport::Inflector)
 
@@ -11,13 +12,13 @@ require 'json'
 require 'net/http'
 require 'uri'
 
-require 'kojn/model'
-require 'kojn/collection'
+require './kojn/model'
+require './kojn/collection'
 
-require 'kojn/crypto'
-require 'kojn/net'
-require 'kojn/invoice'
-require 'kojn/ipn'
+require './kojn/crypto'
+require './kojn/net'
+require './kojn/invoice'
+require './kojn/ipn'
 
 module Kojn
   # Api key
@@ -32,6 +33,16 @@ module Kojn
   # Type of ipn security
   mattr_accessor :ipn_sec
   @@ipn_sec = :integrity
+
+  # Host
+  mattr_accessor :host
+  @@host = "kojn.nl"
+  # Port
+  mattr_accessor :port
+  @@port = 80
+  # SSL
+  mattr_accessor :ssl
+  @@ssl = true
 
   def self.crypto
     raise MissingConfigExecption.new("API key not set") unless self.api_key
