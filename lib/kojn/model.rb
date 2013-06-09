@@ -1,5 +1,17 @@
 module Kojn
-  module Model
+  class Model
+    if ActiveModel::VERSION::MAJOR <= 3
+      include ActiveModel::Validations
+      include ActiveModel::Conversion
+      extend ActiveModel::Naming
+
+      def initialize(attributes = {})
+        self.attributes = attributes
+      end
+    else
+      include ActiveModel::Model
+    end
+
     # Set the attributes based on the given hash
     def attributes=(attributes = {})
       attributes.each do |name, value|

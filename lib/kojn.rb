@@ -1,5 +1,9 @@
 require 'active_support/core_ext'
+require 'active_support/inflector'
 require 'active_model'
+require 'curb'
+
+String.send(:include, ActiveSupport::Inflector)
 
 require 'base64'
 require 'openssl'
@@ -8,12 +12,13 @@ require 'json'
 require 'net/http'
 require 'uri'
 
-require 'kojn/model'
+require './kojn/model'
+require './kojn/collection'
 
-require 'kojn/crypto'
-require 'kojn/net'
-require 'kojn/transaction'
-require 'kojn/ipn'
+require './kojn/crypto'
+require './kojn/net'
+require './kojn/invoice'
+require './kojn/ipn'
 
 module Kojn
   # Api key
@@ -23,11 +28,21 @@ module Kojn
   mattr_accessor :crypto
 
   # The transactios module
-  mattr_accessor :transactions
+  mattr_accessor :invoices
 
   # Type of ipn security
   mattr_accessor :ipn_sec
   @@ipn_sec = :integrity
+
+  # Host
+  mattr_accessor :host
+  @@host = "kojn.nl"
+  # Port
+  mattr_accessor :port
+  @@port = 80
+  # SSL
+  mattr_accessor :ssl
+  @@ssl = true
 
   def self.crypto
     raise MissingConfigExecption.new("API key not set") unless self.api_key
@@ -37,10 +52,10 @@ module Kojn
     return @@crypto
   end
 
-  def self.transactions
+  def self.invoices
     raise MissingConfigExecption.new("API key not set") unless self.api_key
 
-    @@transacions ||= Kojn::Transactions.new
+    @@transacions ||= Kojn::Invoices.new
 
     return @@transacions
   end
