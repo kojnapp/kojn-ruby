@@ -40,7 +40,7 @@ Gem::Specification.new do |s|
     "spec/spec_helper.rb",
     "spec/transaction_spec.rb"
   ]
-  s.homepage = "https://kojn.nl"
+  s.homepage = "https://kojn-app.com"
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = "1.8.25"
