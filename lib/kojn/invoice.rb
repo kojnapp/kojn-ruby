@@ -8,7 +8,7 @@ module Kojn
     SEEN = 3
     CANCELLED = 4
 
-    attr_accessor :internal_id, :external_id, :address, :currency, :amount, :amount_in_fiat, :exchange_rate, :status, :received_amount, :description, :seen, :received_amount_in_fiat, :source_currency
+    attr_accessor :internal_id, :external_id, :address, :currency, :amount, :amount_in_fiat, :exchange_rate, :status, :received_amount, :description, :seen, :received_amount_in_fiat, :source_currency, :confirmed
     attr_accessor :paid, :amount_left, :redirect_uri
     attr_accessor :error, :message, :errors
 

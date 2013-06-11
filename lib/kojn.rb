@@ -12,13 +12,13 @@ require 'json'
 require 'net/http'
 require 'uri'
 
-require './kojn/model'
-require './kojn/collection'
+require 'kojn/model'
+require 'kojn/collection'
 
-require './kojn/crypto'
-require './kojn/net'
-require './kojn/invoice'
-require './kojn/ipn'
+require 'kojn/crypto'
+require 'kojn/net'
+require 'kojn/invoice'
+require 'kojn/ipn'
 
 module Kojn
   # Api key
