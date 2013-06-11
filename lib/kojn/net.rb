@@ -8,6 +8,7 @@ module Kojn
       verb = verb.upcase.to_sym
 
       c = Curl::Easy.new(self.to_uri(path))
+      c.ssl_verify_host = false
       c.http(verb)
 
       if verb != :GET
