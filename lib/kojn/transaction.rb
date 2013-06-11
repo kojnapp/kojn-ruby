@@ -57,7 +57,7 @@ module Kojn
     include Kojn::Model
 
     attr_accessor :internal_id, :external_id, :address, :currency, :amount, :amount_in_fiat, :exchange_rate, :status, :received_amount, :description, :seen, :received_amount_in_fiat, :confirmed
-    attr_accessor :paid, :amount_left, :redirect_uri
+    attr_accessor :paid, :amount_left, :redirect_uri, :time_left
     attr_accessor :error, :message, :errors
 
     def save
