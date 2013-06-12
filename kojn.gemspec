@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "kojn"
-  s.version = "0.2.6"
+  s.version = "0.2.7"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Jeffrey Wilcke", "Maran Hidskes"]
-  s.date = "2013-06-11"
+  s.date = "2013-06-12"
   s.description = "Ruby gem for communicating with the kojn.nl API. Allows you to create and managed invoices."
   s.email = ["maran.hidskes@gmail.com", "jeff.wilcke@gmail.com"]
   s.extra_rdoc_files = [
