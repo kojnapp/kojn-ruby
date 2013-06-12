@@ -43,6 +43,12 @@ module Kojn
   # SSL
   mattr_accessor :ssl
   @@ssl = true
+  # Verbose libcurl
+  mattr_accessor :verbose
+  @@verbose = false
+  # Disable host & peer checking (change at your own risk)
+  mattr_accessor :verify_peer_and_host
+  @@verify_peer_and_host = true
 
   def self.crypto
     raise MissingConfigExecption.new("API key not set") unless self.api_key
