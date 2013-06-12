@@ -1,7 +1,7 @@
 require 'active_support/core_ext'
 require 'active_support/inflector'
 require 'active_model'
-require 'curb'
+require 'faraday'
 
 String.send(:include, ActiveSupport::Inflector)
 

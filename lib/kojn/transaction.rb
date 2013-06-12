@@ -20,19 +20,19 @@ module Kojn
     end
 
     def all(options = {})
-      Kojn.parse_objects! Kojn::Net::get('/api/transactions').read_body, Kojn::Tx
+      Kojn.parse_objects! Kojn::Net::get('/api/transactions').body, Kojn::Tx
     end
 
     def create(options = {})
-      Kojn.parse_object! Kojn::Net::post('/api/transactions', {transaction: options}).read_body, Kojn::Tx
+      Kojn.parse_object! Kojn::Net::post('/api/transactions', {transaction: options}).body, Kojn::Tx
     end
 
     def find(id, options = {})
-      Kojn.parse_object! Kojn::Net::get("/api/transactions/#{id}").read_body, Kojn::Tx
+      Kojn.parse_object! Kojn::Net::get("/api/transactions/#{id}").body, Kojn::Tx
     end
 
     def update(id, options = {})
-      Kojn.parse_object! Kojn::Net::patch("/api/transactions/#{id}", options).read_body, Kojn::Tx
+      Kojn.parse_object! Kojn::Net::patch("/api/transactions/#{id}", options).body, Kojn::Tx
     end
   end
 

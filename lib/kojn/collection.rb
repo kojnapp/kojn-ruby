@@ -12,19 +12,19 @@ module Kojn
     end
 
     def all(options = {})
-      parse_objects! Kojn::Net::get(self.path).body_str, self.model
+      parse_objects! Kojn::Net::get(self.path).body, self.model
     end
 
     def create(options = {})
-      parse_object! Kojn::Net::post(self.path, {invoice: options}).body_str, self.model
+      parse_object! Kojn::Net::post(self.path, {invoice: options}).body, self.model
     end
 
     def find(id, options = {})
-      parse_object! Kojn::Net::get("#{self.path}/#{id}").body_str, self.model
+      parse_object! Kojn::Net::get("#{self.path}/#{id}").body, self.model
     end
 
     def update(id, options = {})
-      parse_object! Kojn::Net::patch("#{self.path}/#{id}", options).body_str, self.model
+      parse_object! Kojn::Net::patch("#{self.path}/#{id}", options).body, self.model
     end
 
     protected
